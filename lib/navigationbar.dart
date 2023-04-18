@@ -31,12 +31,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             context,
             MaterialPageRoute(builder: (context) => const BinaryScreen()),
           );
-          if(_selectedIndex==0){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-          }
+        }
+        if(_selectedIndex==0){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
         }
       },
       items: const [
