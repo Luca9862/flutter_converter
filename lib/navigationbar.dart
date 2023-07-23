@@ -18,27 +18,17 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     const BinaryScreen(),
   ];
 
+  void onItemTap(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: _selectedIndex,
-      onTap: (int index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-        if (_selectedIndex == 1) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const BinaryScreen()),
-          );
-          if(_selectedIndex==0){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-          }
-        }
-      },
+      onTap: onItemTap,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.onetwothree),

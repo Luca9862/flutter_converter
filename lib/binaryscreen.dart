@@ -53,7 +53,7 @@ class _BinaryScreen extends State<BinaryScreen> {
           Center(
             child: TextField(
               controller: myController,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Insert',
