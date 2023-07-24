@@ -1,24 +1,39 @@
-import 'package:convertitore/binaryscreen.dart';
 import 'package:flutter/material.dart';
+import 'HomePage.dart'; // Importa la schermata Meters
+import 'BinaryScreen.dart'; // Importa la schermata Binary
 
-import 'HomePage.dart';
+void main() => runApp(const BottomNavigationBarExampleApp());
 
-class MyBottomNavigationBar extends StatefulWidget {
-  const MyBottomNavigationBar({Key? key}) : super(key: key);
+class BottomNavigationBarExampleApp extends StatelessWidget {
+  const BottomNavigationBarExampleApp({super.key});
 
   @override
-  _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: BottomNavigationBarExample(),
+    );
+  }
 }
 
-class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
-  int _selectedIndex = 0;
+class BottomNavigationBarExample extends StatefulWidget {
+  const BottomNavigationBarExample({super.key});
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    const BinaryScreen(),
+  @override
+  State<BottomNavigationBarExample> createState() =>
+      _BottomNavigationBarExampleState();
+}
+
+class _BottomNavigationBarExampleState
+    extends State<BottomNavigationBarExample> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    HomePage(), // Utilizza la schermata Meters
+    BinaryScreen(), // Utilizza la schermata Binary
   ];
 
-  void onItemTap(int index){
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -26,23 +41,34 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: onItemTap,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.onetwothree),
-          label: 'Meters',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.computer),
-          label: 'Binary',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Converter'),
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.one_k),
+            label: 'Meters',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.numbers),
+            label: 'Binary',
+          ),
+          /*BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Settings',
+          ),*/
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
+
+

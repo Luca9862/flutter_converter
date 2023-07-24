@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: const MyBottomNavigationBar(),
+      //bottomNavigationBar: const MyBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {

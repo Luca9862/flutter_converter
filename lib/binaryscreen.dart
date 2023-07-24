@@ -66,7 +66,7 @@ class _BinaryScreen extends State<BinaryScreen> {
           ),
         ]
       ),
-      bottomNavigationBar: const MyBottomNavigationBar(),
+      //bottomNavigationBar: const MyBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
