@@ -4,11 +4,10 @@ Flutter Converter is a user-friendly application available on both Android and i
 
 Flutter Converter is designed to take a string of characters as input and provide the corresponding binary language translation as output.
 
+Example screen:
+
 <figure>
   <img src="./readme_image/first_screen.jpg" alt="screen example" width="50%" height="50%">
-  <figcaption>
-    Example screen
-  </figcaption>
 </figure>
 
 <figure>
