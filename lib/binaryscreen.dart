@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'navigationbar.dart';
-
 class BinaryScreen extends StatefulWidget {
   const BinaryScreen({super.key});
 
@@ -44,9 +42,6 @@ class _BinaryScreen extends State<BinaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Binary convert'),
-      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -66,7 +61,6 @@ class _BinaryScreen extends State<BinaryScreen> {
           ),
         ]
       ),
-      bottomNavigationBar: const MyBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
