@@ -1,0 +1,1 @@
+ /Users/lucacanali/Progetti/flutter_converter/.dart_tool/flutter_build/ea41d324e4b379c330739de41d0f8a73/native_assets.yaml: 
