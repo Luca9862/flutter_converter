@@ -26,7 +26,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Converter'),
       ),
-      body: const BinaryScreen()
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.deepPurpleAccent, Colors.amber],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight
+          ),
+        ),
+          child: const BinaryScreen()
+      )
     );
   }
 }
