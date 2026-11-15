@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
+
+import 'src/translator_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const BinaryTranslatorApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class BinaryTranslatorApp extends StatelessWidget {
+  const BinaryTranslatorApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage()
+    const seed = Colors.indigo;
+    return MaterialApp(
+      title: 'Binary Translator',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(colorSchemeSeed: seed),
+      darkTheme: ThemeData(colorSchemeSeed: seed, brightness: Brightness.dark),
+      home: const TranslatorPage(),
     );
   }
 }
-

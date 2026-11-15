@@ -1,17 +1,26 @@
-# flutter_converter
+# Binary Translator
 
-Flutter Converter is a user-friendly application available on both Android and iOS devices. Developed with Flutter and Dart, this project seamlessly combines efficiency with an intuitive user interface. Whether you're using an Android smartphone or an iOS device, Flutter Converter offers a simple and smooth experience for all users.
+A small Flutter app that translates text to binary and binary back to text.
 
-Flutter Converter is designed to take a string of characters as input and provide the corresponding binary language translation as output.
+- **Text → Binary**: every character is encoded as UTF-8, one 8-bit group per byte
+  (so accented letters and emoji work too: `è` → `11000011 10101000`).
+- **Binary → Text**: paste space-separated 8-bit groups to get the text back.
+- Switching direction feeds the current result back as input, so you can check the round trip.
 
-Example screen:
+## Download
 
-<figure>
-  <img src="./readme_image/first_screen.jpg" alt="screen example" width="50%" height="50%">
-</figure>
+Every push to `main` builds a release APK and publishes it on the
+[Releases page](../../releases) (tag `v<version>-build.<run>`).
+The version name comes from `pubspec.yaml`.
 
-<figure>
-  <img src="./readme_image/second_screen.jpg" alt="screen example" width="50%" height="50%">
-</figure>
+## Development
 
+```bash
+flutter pub get
+flutter test
+flutter run
+```
 
+## Screenshots
+
+<img src="./readme_image/first_screen.jpg" alt="Text to binary" width="40%"> <img src="./readme_image/second_screen.jpg" alt="Binary output" width="40%">

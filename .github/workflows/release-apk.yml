@@ -1,0 +1,67 @@
+name: Release APK
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # AGP 8.1 / Gradle 8.3 in android/ need Java 17; Flutter is pinned so
+      # builds stay reproducible (same setup as MyPet).
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      # A broken build must not become a release.
+      - run: flutter analyze --no-fatal-infos
+      - run: flutter test
+
+      # The human-facing version comes from pubspec.yaml; the run number keeps
+      # versionCode and the release tag unique on every push to main.
+      - name: Compute version from pubspec
+        id: version
+        run: |
+          NAME=$(grep -m1 '^version:' pubspec.yaml | sed -E 's/version:[[:space:]]*//; s/\+.*//')
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "number=$GITHUB_RUN_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "tag=v$NAME-build.$GITHUB_RUN_NUMBER" >> "$GITHUB_OUTPUT"
+
+      - name: Build release APK
+        run: >
+          flutter build apk --release
+          --build-name=${{ steps.version.outputs.name }}
+          --build-number=${{ steps.version.outputs.number }}
+
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk binary-translator-${{ steps.version.outputs.name }}.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: binary-translator-apk
+          path: binary-translator-*.apk
+
+      - name: Create GitHub Release with APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: Binary Translator ${{ steps.version.outputs.tag }}
+          files: binary-translator-*.apk
+          generate_release_notes: true
